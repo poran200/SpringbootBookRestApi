@@ -36,7 +36,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Response findAllIsActive(Pageable pageable) {
-        Page bookPage = bookRepository.findAll(pageable);
+        Page<Book> bookPage = bookRepository.findAll(pageable);
         return getSuccessResponsePage(HttpStatus.OK,"All Books ",bookPage);
     }
 
