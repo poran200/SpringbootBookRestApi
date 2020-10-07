@@ -6,9 +6,12 @@ import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.BookService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 import static com.example.demo.util.ResponseBuilder.*;
 
@@ -22,9 +25,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Response crete(Book book) {
-        var bookOptional = bookRepository.findByIsbnAndIsActiveTrue(book.getIsbn());
-        if (bookOptional.isEmpty()){
-            var saveBook = bookRepository.save(book);
+        Optional<Book> bookOptional = bookRepository.findByIsbnAndIsActiveTrue(book.getIsbn());
+        if (!bookOptional.isPresent()){
+            Book saveBook = bookRepository.save(book);
             return getSuccessResponse(HttpStatus.CREATED,"Book Created",saveBook);
         }else {
            return getFailureResponse(HttpStatus.BAD_REQUEST,"Book is already exist isbn: "+book.getIsbn());
@@ -33,16 +36,16 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Response findAllIsActive(Pageable pageable) {
-        var bookPage = bookRepository.findAll(pageable);
+        Page bookPage = bookRepository.findAll(pageable);
         return getSuccessResponsePage(HttpStatus.OK,"All Books ",bookPage);
     }
 
     @Override
     public Response update(long bookId, Book book) {
-        var optionalBook = bookRepository.findByBookIdAndIsActiveTrue(bookId);
+        Optional<Book> optionalBook = bookRepository.findByBookIdAndIsActiveTrue(bookId);
         if (optionalBook.isPresent()){
             BeanUtils.copyProperties(book,optionalBook.get());
-            var updateBook = bookRepository.save(optionalBook.get());
+            Book updateBook = bookRepository.save(optionalBook.get());
             return getSuccessResponse(HttpStatus.OK,"Book Updated",updateBook);
         }
        return getFailureResponse(HttpStatus.NOT_FOUND,"Book not found");
@@ -50,7 +53,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Response delete(long bookId) {
-        var bookOptional = bookRepository.findByBookIdAndIsActiveTrue(bookId);
+        Optional<Book> bookOptional = bookRepository.findByBookIdAndIsActiveTrue(bookId);
         if (bookOptional.isPresent()){
             bookOptional.get().setIsActive(false);
             bookRepository.save(bookOptional.get());
@@ -62,14 +65,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Response findById(long bookId) {
-        var optionalBook = bookRepository.findByBookIdAndIsActiveTrue(bookId);
+        Optional<Book> optionalBook = bookRepository.findByBookIdAndIsActiveTrue(bookId);
         return  optionalBook.map(book -> getSuccessResponse(HttpStatus.OK,"Book found",book))
                 .orElse(getFailureResponse(HttpStatus.NOT_FOUND,"book not found"+bookId));
     }
 
     @Override
     public Response findBYIsbn(String isbn) {
-        var optionalBook = bookRepository.findByIsbnAndIsActiveTrue(isbn);
+        Optional<Book> optionalBook = bookRepository.findByIsbnAndIsActiveTrue(isbn);
         return  optionalBook.map(book -> getSuccessResponse(HttpStatus.OK,"book found",book))
                 .orElse(getFailureResponse(HttpStatus.NOT_FOUND,"book not found Isbn: "+isbn));
 
@@ -77,7 +80,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Response findByAuthor(String author) {
-        var optionalBook = bookRepository.findByAuthorAndIsActiveTrue(author);
+        Optional<Book> optionalBook = bookRepository.findByAuthorAndIsActiveTrue(author);
         return  optionalBook.map(book -> getSuccessResponse(HttpStatus.OK,"book found",book))
                 .orElse(getFailureResponse(HttpStatus.NOT_FOUND,"book not found Author: "+author));
     }
