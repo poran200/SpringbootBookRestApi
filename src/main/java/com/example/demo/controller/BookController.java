@@ -27,13 +27,13 @@ public class BookController {
             return ResponseEntity.badRequest()
                     .body(ResponseBuilder.getFailureResponse(bindingResult,"Bean validation error"));
         }
-        var response = bookService.crete(book);
+        Response response = bookService.crete(book);
          return getResponse(response);
     }
 
     @GetMapping(UrlConstrains.BookManagement.FIND_BY_ID)
     public ResponseEntity<Object> findById(@PathVariable long id){
-        var response = bookService.findById(id);
+        Response response = bookService.findById(id);
          return getResponse(response);
 
     }
@@ -44,17 +44,17 @@ public class BookController {
         if (pageable ==null){
             pageable=request;
         }
-        var re = bookService.findAllIsActive(pageable);
+        Response re = bookService.findAllIsActive(pageable);
         return getResponse(re);
     }
     @PutMapping(UrlConstrains.BookManagement.UPDATE)
     public ResponseEntity<Object>update(@PathVariable long id,@RequestBody Book book){
-        var response = bookService.update(id, book);
+        Response response = bookService.update(id, book);
         return getResponse(response);
     }
     @GetMapping(UrlConstrains.BookManagement.FIND_BY_ISBN)
     public ResponseEntity<Object> finByIsbn(@PathVariable String isbn){
-        var response = bookService.findBYIsbn(isbn);
+        Response response = bookService.findBYIsbn(isbn);
         return getResponse(response);
     }
     @GetMapping(UrlConstrains.BookManagement.FIND_BY_AUTHOR)
