@@ -19,7 +19,7 @@ public class WebServicesInfoController {
           webServiceInfo.setVersion("api/v1");
           webServiceInfo.setName("MD Najmul Hasan");
           webServiceInfo.setId(2017100000028L);
-          webServiceInfo.add(linkTo(methodOn(SwaggerInitialController.class)).withRel("Swagger"));
+          webServiceInfo.add(linkTo(methodOn(SwaggerInitialController.class)).withRel("swagger"));
           return ResponseEntity.ok(webServiceInfo);
       }
 }
