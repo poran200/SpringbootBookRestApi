@@ -20,6 +20,6 @@ public class WebServicesInfoController {
           webServiceInfo.setName("MD Najmul Hasan");
           webServiceInfo.setId(2017100000028L);
           webServiceInfo.add(linkTo(methodOn(SwaggerInitialController.class)).withRel("Swagger"));
-          return ResponseEntity.ok().body(webServiceInfo);
+          return ResponseEntity.ok(webServiceInfo);
       }
 }
