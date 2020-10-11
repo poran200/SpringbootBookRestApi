@@ -5,9 +5,9 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 
 @RestController
 @RequestMapping("/")
@@ -19,7 +19,7 @@ public class WebServicesInfoController {
                   "MD Najmul Hasan",2017100000028L);
 
 
-         webServiceInfo.setSwagger(new UrlResource(URI.create("/swagger")));
+         webServiceInfo.setSwagger(new UrlResource(UriComponentsBuilder.fromPath("/swagger").toUriString()));
          return webServiceInfo;
 
       }
