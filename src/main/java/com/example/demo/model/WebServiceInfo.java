@@ -3,7 +3,6 @@ package com.example.demo.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.web.servlet.view.RedirectView;
 
 @EqualsAndHashCode
 @Data
@@ -21,6 +20,6 @@ public class WebServiceInfo  {
     private String version;
     private String name;
     private long id;
-    private RedirectView swagger;
+    private String swagger_end_point;
 
 }
