@@ -15,7 +15,7 @@ public class WebServicesInfoController {
           WebServiceInfo webServiceInfo= new WebServiceInfo("Book Api","api/v1",
                   "MD Najmul Hasan",2017100000028L);
 
-         webServiceInfo.setSwagger(new RedirectView("swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/"));
+         webServiceInfo.setSwagger(new RedirectView("swagger"));
          return webServiceInfo;
 
       }
