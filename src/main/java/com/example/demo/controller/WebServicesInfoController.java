@@ -12,7 +12,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/")
 public class WebServicesInfoController {
-      @GetMapping
+      @GetMapping("/")
       public ResponseEntity<Object> getWebServicesInfo(){
           WebServiceInfo webServiceInfo = new WebServiceInfo();
           webServiceInfo.setWebserviceName("Book Api");

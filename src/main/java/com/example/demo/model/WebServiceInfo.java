@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
 public class WebServiceInfo extends RepresentationModel<WebServiceInfo> {
@@ -13,5 +13,5 @@ public class WebServiceInfo extends RepresentationModel<WebServiceInfo> {
     private String version;
     private String name;
     private long id;
-    private String swaggerLink;
+
 }
