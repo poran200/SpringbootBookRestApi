@@ -3,7 +3,6 @@ package com.example.demo.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.core.io.UrlResource;
 
 @EqualsAndHashCode
 @Data
@@ -21,6 +20,6 @@ public class WebServiceInfo  {
     private String version;
     private String name;
     private long id;
-    private UrlResource swagger;
+    private String swagger;
 
 }
